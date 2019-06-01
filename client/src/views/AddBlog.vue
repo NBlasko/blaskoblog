@@ -1,61 +1,64 @@
 <template>
   <div>
-    <h2> Add a blog </h2>
+    <h2>Add a blog</h2>
     <div class="add-blog">
       <form>
-        <label> Blog title </label>
-        <input type="text" v-model.lazy="blog.title" required />
-        <label> Blog Content </label>
+        <label>Blog title</label>
+        <input type="text" v-model.lazy="blog.title" required>
+        <label>Blog Content</label>
         <textarea v-model.lazy="blog.content"></textarea>
-
-        <button v-on:click.prevent="post"> Post </button>
+        <button v-on:click.prevent="post">Post</button>
       </form>
 
       <div id="preview">
-        <h3> Preview </h3>
-        <p> Blog title: {{blog.title}} </p>
-        <p> Blog Content: {{blog.content}} </p>
+        <h3>Preview</h3>
+        <p>Blog title: {{blog.title}}</p>
+        <p>Blog Content: {{blog.content}}</p>
       </div>
-      <div v-if="submitedPost" class = "submitedPost"> Thank you! Your message has been successfully sent.
-      </div>
+      <div
+        v-if="submitedPost"
+        class="submited-post"
+      >Thank you! Your message has been successfully sent.</div>
     </div>
-
   </div>
 </template>
 
 <script>
-//import FooterComponent from '@/components/FooterComponent.vue'
-const API_URL = 'http://localhost:3000/blogs';
+const API_URL = "http://localhost:3000/blogs";
 
 export default {
-  name: 'addblog',
-  components: {
-    //  'footer-component': FooterComponent
-  },
+  name: "addblog",
   data() {
     return {
       blog: {
         title: "",
-        content: "",
+        content: ""
       },
-      submitedPost: false,
+      submitedPost: false
+    };
+  },
+  watch: {
+    blog: {
+      handler() {
+        this.submitedPost = false;
+      },
+      deep: true
     }
   },
   methods: {
     post() {
-      this.$http.post(API_URL + '/addBlog/', {
-        title: this.blog.title,
-        body: this.blog.content,
-      }).then(function(snap) {
-        //   if(snap.ok)
-        //ovde mogu kad aktiviram store i vuex da prebacim ove podatke u data() komponente Home
-        console.log("snap", snap)
-        this.submitedPost = true;
-      })
+      this.$http
+        .post(API_URL + "/addBlog/", {
+          title: this.blog.title,
+          body: this.blog.content
+        })
+        .then(function(snap) {
+          console.log("snap", snap);
+          this.submitedPost = true;
+        });
     }
   }
-
-}
+};
 </script>
 
 
@@ -88,7 +91,6 @@ textarea {
 }
 
 button {
-
   border: none;
   color: white;
   padding: 16px 32px;
@@ -103,11 +105,11 @@ button {
   cursor: pointer;
   background-color: white;
   color: black;
-  border: 2px solid #008CBA;
+  border: 2px solid #008cba;
 }
 
 button:hover {
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
 }
 
@@ -134,12 +136,8 @@ h2 {
   text-align: center;
 }
 
-footer-component {
-  position: sticky;
-}
-
-.submitedPost {
-  color: #008CBA;
- font-size: 18px;
+.submited-post {
+  color: #008cba;
+  font-size: 18px;
 }
 </style>
