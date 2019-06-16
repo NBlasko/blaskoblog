@@ -19,7 +19,7 @@ export default {
     height: 50px;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: calc(100%-10px);
     background-color: #333;
     color: white;
     text-align: center;
