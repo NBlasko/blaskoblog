@@ -48,7 +48,7 @@ export default {
   methods: {
     post() {
       this.$http
-        .post(API_URL + "/addBlog/", {
+        .post(API_URL + "/addblog/", {
           title: this.blog.title,
           body: this.blog.content
         })

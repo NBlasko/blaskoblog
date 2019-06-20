@@ -25,7 +25,7 @@ export default {
   },
   created() {
     this.$http
-      .get(API_URL + "/singleBlog/" + this.id)
+      .get(API_URL + "/singleblog/" + this.id)
       .then(function(snap) {
         this.blog = snap.body;
         console.log(snap);
